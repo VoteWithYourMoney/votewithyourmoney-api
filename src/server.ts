@@ -4,6 +4,7 @@ import cors, { CorsOptions } from 'cors';
 import express, { Router } from 'express';
 
 import path from 'path';
+import { findOrg, getOrgInfo } from './opensecrets';
 
 const app = express();
 
@@ -21,7 +22,8 @@ app.use(bodyParser.json());
 const api = Router();
 
 api.get(`/`, async (req, res) => {
-    res.json({ test: true});
+    const response = await getOrgInfo('D000088318');
+    res.json(response);
   });
 
 app.use('/api', api);
